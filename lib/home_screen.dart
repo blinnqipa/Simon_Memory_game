@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simon_memory_game/services/score.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -41,6 +43,7 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.deepOrange),
                 ),
                 onPressed: () {
+                  Provider.of<Score>(context).resetScore();
                   Navigator.pushNamed(context, '/gameScreen');
                 },
               ),
