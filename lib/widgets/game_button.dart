@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simon_memory_game/services/score.dart';
 
 class GameButton extends StatelessWidget {
   final Color buttonColor;
@@ -18,7 +20,9 @@ class GameButton extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Provider.of<Score>(context).incrementScore();
+      },
       borderRadius: BorderRadius.all(Radius.circular(20)),
       splashColor: Colors.black12,
     );

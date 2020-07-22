@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simon_memory_game/services/score.dart';
 import 'package:simon_memory_game/widgets/game_button.dart';
 
 class GameScreen extends StatelessWidget {
-  final int currentScore = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class GameScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Text(
-                  currentScore.toString(),
+                  Provider.of<Score>(context).score,
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w800,
