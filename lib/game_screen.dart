@@ -38,9 +38,11 @@ class GameScreen extends StatelessWidget {
                 children: <Widget>[
                   GameButton(
                     buttonColor: Colors.red,
+                    buttonIndex: 0,
                   ),
                   GameButton(
                     buttonColor: Colors.blue,
+                    buttonIndex: 1,
                   ),
                 ],
               ),
@@ -50,9 +52,11 @@ class GameScreen extends StatelessWidget {
                 children: <Widget>[
                   GameButton(
                     buttonColor: Colors.green,
+                    buttonIndex: 2,
                   ),
                   GameButton(
                     buttonColor: Colors.yellow,
+                    buttonIndex: 3,
                   ),
                 ],
               ),
