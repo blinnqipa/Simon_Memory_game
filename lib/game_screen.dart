@@ -3,7 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:simon_memory_game/services/score.dart';
 import 'package:simon_memory_game/widgets/game_button.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
+  @override
+  _GameScreenState createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
