@@ -23,6 +23,13 @@ class _GameButtonState extends State<GameButton> {
       height: MediaQuery.of(context).size.height * 0.37,
       width: MediaQuery.of(context).size.width * 0.47,
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                offset: Offset(0, 0),
+                color: widget.buttonColor,
+                spreadRadius: 2,
+                blurRadius: 0.4)
+          ],
           color: widget.buttonColor,
           borderRadius: BorderRadius.all(
             Radius.circular(20),
@@ -33,6 +40,11 @@ class _GameButtonState extends State<GameButton> {
           onTap: () {
             setState(() {
               thickness = (thickness == 0) ? 10 : 0;
+              if (Provider.of<GameLogic>(context, listen: false)
+                  .listEqualLength()) {
+                print('equal');
+                Provider.of<Score>(context, listen: false).incrementScore();
+              }
               Provider.of<GameLogic>(context, listen: false).currentMove++;
               Provider.of<GameLogic>(context, listen: false)
                   .addToUserList(widget.buttonIndex);
@@ -41,7 +53,6 @@ class _GameButtonState extends State<GameButton> {
                 Provider.of<GameLogic>(context, listen: false).gameLost = false;
               }
             });
-            Provider.of<Score>(context, listen: false).incrementScore();
           },
           borderRadius: BorderRadius.all(
             Radius.circular(20),

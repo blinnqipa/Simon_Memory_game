@@ -35,8 +35,9 @@ class GameLogic extends ChangeNotifier {
     notifyListeners();
   }
 
-  int gameListLength() => gameList.length;
-  int userPressListLength() => userPress.length;
+  bool listEqualLength() {
+    return (gameList.length - 1 == userPress.length);
+  }
 
   void addToUserList(int buttonPressed) {
     userPress.add(buttonPressed);

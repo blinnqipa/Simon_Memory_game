@@ -9,8 +9,6 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +23,7 @@ class _GameScreenState extends State<GameScreen> {
           child: Column(
             children: <Widget>[
               Text(
-                'Score: ',
+                'Score:',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
