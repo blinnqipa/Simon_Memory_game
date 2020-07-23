@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simon_memory_game/services/game_logic.dart';
 import 'package:simon_memory_game/services/score.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,6 +45,8 @@ class HomeScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   Provider.of<Score>(context).resetScore();
+                  Provider.of<GameLogic>(context).resetGame();
+                  Provider.of<GameLogic>(context).addToGameList();
                   Navigator.pushNamed(context, '/gameScreen');
                 },
               ),

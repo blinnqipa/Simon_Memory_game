@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:simon_memory_game/scores_screen.dart';
+import 'screens/scores_screen.dart';
 import 'package:simon_memory_game/services/game_logic.dart';
 import 'package:simon_memory_game/services/score.dart';
-import 'game_screen.dart';
-import 'home_screen.dart';
+import 'screens/game_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());

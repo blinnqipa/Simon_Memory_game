@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simon_memory_game/services/game_logic.dart';
@@ -35,7 +33,13 @@ class _GameButtonState extends State<GameButton> {
           onTap: () {
             setState(() {
               thickness = (thickness == 0) ? 10 : 0;
-              Provider.of<GameLogic>(context).addToList();
+              Provider.of<GameLogic>(context).addToUserList(widget.buttonIndex);
+              Provider.of<GameLogic>(context).addToGameList();
+              if (Provider.of<GameLogic>(context).gameLost) {
+                Navigator.pop(context);
+                Provider.of<GameLogic>(context).gameLost = false;
+              }
+              ;
             });
             Provider.of<Score>(context).incrementScore();
           },
