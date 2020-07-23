@@ -33,15 +33,15 @@ class _GameButtonState extends State<GameButton> {
           onTap: () {
             setState(() {
               thickness = (thickness == 0) ? 10 : 0;
-              Provider.of<GameLogic>(context).addToUserList(widget.buttonIndex);
-              Provider.of<GameLogic>(context).addToGameList();
-              if (Provider.of<GameLogic>(context).gameLost) {
-                Navigator.pop(context);
-                Provider.of<GameLogic>(context).gameLost = false;
+              Provider.of<GameLogic>(context, listen: false)
+                  .addToUserList(widget.buttonIndex);
+              Provider.of<GameLogic>(context, listen: false).addToGameList();
+              if (Provider.of<GameLogic>(context, listen: false).gameLost) {
+                Navigator.pushNamed(context, '/gameOverScreen');
+                Provider.of<GameLogic>(context, listen: false).gameLost = false;
               }
-              ;
             });
-            Provider.of<Score>(context).incrementScore();
+            Provider.of<Score>(context, listen: false).incrementScore();
           },
           borderRadius: BorderRadius.all(
             Radius.circular(20),

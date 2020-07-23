@@ -44,9 +44,10 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.deepOrange),
                 ),
                 onPressed: () {
-                  Provider.of<Score>(context).resetScore();
-                  Provider.of<GameLogic>(context).resetGame();
-                  Provider.of<GameLogic>(context).addToGameList();
+                  Provider.of<Score>(context, listen: false).resetScore();
+                  Provider.of<GameLogic>(context, listen: false).resetGame();
+                  Provider.of<GameLogic>(context, listen: false)
+                      .addToGameList();
                   Navigator.pushNamed(context, '/gameScreen');
                 },
               ),

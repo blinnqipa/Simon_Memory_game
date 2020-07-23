@@ -7,6 +7,7 @@ class GameLogic extends ChangeNotifier {
   var userPress = List();
   var random = Random();
   bool gameLost = false;
+
   void addToGameList() {
     gameList.add(random.nextInt(4));
     notifyListeners();
@@ -16,11 +17,14 @@ class GameLogic extends ChangeNotifier {
   void checkResult() {
     Function checkListEquality = const ListEquality().equals;
     if (!checkListEquality(gameList, userPress)) {
-      print('LOST!');
       gameLost = true;
       resetGame();
       notifyListeners();
     }
+  }
+
+  void resetUserPressList() {
+    userPress.clear();
   }
 
   void resetGame() {
@@ -28,6 +32,9 @@ class GameLogic extends ChangeNotifier {
     userPress.clear();
     notifyListeners();
   }
+
+  int gameListLength() => gameList.length;
+  int userPressListLength() => userPress.length;
 
   void addToUserList(int buttonPressed) {
     userPress.add(buttonPressed);
