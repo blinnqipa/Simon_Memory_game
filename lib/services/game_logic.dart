@@ -7,6 +7,7 @@ class GameLogic extends ChangeNotifier {
   var userPress = List();
   var random = Random();
   bool gameLost = false;
+  int currentMove = 0;
 
   void addToGameList() {
     gameList.add(random.nextInt(4));
@@ -25,6 +26,7 @@ class GameLogic extends ChangeNotifier {
 
   void resetUserPressList() {
     userPress.clear();
+    currentMove = 0;
   }
 
   void resetGame() {
@@ -40,6 +42,16 @@ class GameLogic extends ChangeNotifier {
     userPress.add(buttonPressed);
     notifyListeners();
     print("User List=>" + userPress.toString());
-    checkResult();
+
+    if (userPress.elementAt(currentMove - 1) !=
+        gameList.elementAt(currentMove - 1)) {
+      checkResult();
+      resetUserPressList();
+    }
+    if (userPress.length == gameList.length) {
+      checkResult();
+      addToGameList();
+      resetUserPressList();
+    }
   }
 }
