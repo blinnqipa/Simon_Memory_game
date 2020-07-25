@@ -12,8 +12,24 @@ class GameButton extends StatefulWidget {
   _GameButtonState createState() => _GameButtonState();
 }
 
-class _GameButtonState extends State<GameButton> {
+class _GameButtonState extends State<GameButton>
+    with SingleTickerProviderStateMixin {
   double thickness = 0;
+
+  AnimationController controller;
+  Animation animation;
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: Duration(seconds: 1), vsync: this);
+    animation = CurvedAnimation(parent: controller, curve: Curves.bounceOut);
+    controller.forward();
+    controller.addListener(() {
+      setState(() {});
+      print(controller.value);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +42,11 @@ class _GameButtonState extends State<GameButton> {
           boxShadow: [
             BoxShadow(
                 offset: Offset(0, 0),
-                color: widget.buttonColor,
+                color: widget.buttonColor.withOpacity(animation.value),
                 spreadRadius: 2,
                 blurRadius: 0.4)
           ],
-          color: widget.buttonColor,
+          color: widget.buttonColor.withOpacity(animation.value),
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),
@@ -42,7 +58,6 @@ class _GameButtonState extends State<GameButton> {
               thickness = (thickness == 0) ? 10 : 0;
               if (Provider.of<GameLogic>(context, listen: false)
                   .listEqualLength()) {
-                print('equal');
                 Provider.of<Score>(context, listen: false).incrementScore();
               }
               Provider.of<GameLogic>(context, listen: false).currentMove++;
@@ -59,7 +74,7 @@ class _GameButtonState extends State<GameButton> {
           ),
           splashColor: Colors.white,
         ),
-        color: widget.buttonColor,
+        color: widget.buttonColor.withOpacity(animation.value),
         borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),

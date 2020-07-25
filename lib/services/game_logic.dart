@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,7 @@ class GameLogic extends ChangeNotifier {
   var random = Random();
   bool gameLost = false;
   int currentMove = 0;
+  int currentButton;
 
   void addToGameList() {
     gameList.add(random.nextInt(4));
@@ -21,6 +23,13 @@ class GameLogic extends ChangeNotifier {
       gameLost = true;
       resetGame();
       notifyListeners();
+    }
+  }
+
+  void showButtonCombination() {
+    for (int i = 0; i < gameList.length; i++) {
+      currentButton = gameList[i];
+//      print(currentButton);
     }
   }
 
@@ -41,8 +50,7 @@ class GameLogic extends ChangeNotifier {
 
   void addToUserList(int buttonPressed) {
     userPress.add(buttonPressed);
-    notifyListeners();
-    print("User List=>" + userPress.toString());
+//    print("User List=>" + userPress.toString());
 
     if (userPress.elementAt(currentMove - 1) !=
         gameList.elementAt(currentMove - 1)) {
@@ -54,5 +62,7 @@ class GameLogic extends ChangeNotifier {
       addToGameList();
       resetUserPressList();
     }
+    showButtonCombination();
+    notifyListeners();
   }
 }
