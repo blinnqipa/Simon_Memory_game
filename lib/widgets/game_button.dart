@@ -14,23 +14,7 @@ class GameButton extends StatefulWidget {
 
 class _GameButtonState extends State<GameButton>
     with SingleTickerProviderStateMixin {
-  double thickness = 0;
-
-  AnimationController controller;
-  Animation animation;
-  @override
-  void initState() {
-    super.initState();
-    controller =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
-    animation = CurvedAnimation(parent: controller, curve: Curves.bounceOut);
-    controller.forward();
-    controller.addListener(() {
-      setState(() {});
-      print(controller.value);
-    });
-  }
-
+  Stream stream;
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -39,23 +23,27 @@ class _GameButtonState extends State<GameButton>
       height: MediaQuery.of(context).size.height * 0.37,
       width: MediaQuery.of(context).size.width * 0.47,
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, 0),
-                color: widget.buttonColor.withOpacity(animation.value),
-                spreadRadius: 2,
-                blurRadius: 0.4)
-          ],
-          color: widget.buttonColor.withOpacity(animation.value),
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
-          ),
-          border: Border.all(width: thickness, color: Colors.white)),
+        boxShadow: [
+          BoxShadow(
+              offset: Offset(0, 0),
+              color: widget.buttonColor,
+              spreadRadius: 2,
+              blurRadius: 0.4)
+        ],
+        color: widget.buttonColor,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        border: Border.all(width: 0, color: Colors.white),
+      ),
       child: Material(
         child: InkWell(
           onTap: () {
             setState(() {
-              thickness = (thickness == 0) ? 10 : 0;
+//              stream = Provider.of<GameLogic>(context, listen: false)
+//                  .streamController
+//                  .stream;
+//              stream.listen((event) {
+//                print(event);
+//              });
               if (Provider.of<GameLogic>(context, listen: false)
                   .listEqualLength()) {
                 Provider.of<Score>(context, listen: false).incrementScore();
@@ -69,12 +57,10 @@ class _GameButtonState extends State<GameButton>
               }
             });
           },
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           splashColor: Colors.white,
         ),
-        color: widget.buttonColor.withOpacity(animation.value),
+        color: widget.buttonColor,
         borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),

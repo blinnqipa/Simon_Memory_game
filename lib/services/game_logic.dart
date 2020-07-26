@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:collection';
 import 'dart:io';
 import 'dart:math';
 import 'package:collection/collection.dart';
@@ -10,9 +12,14 @@ class GameLogic extends ChangeNotifier {
   bool gameLost = false;
   int currentMove = 0;
   int currentButton;
+  int i = 100;
+  var generatedRandomNumber;
+//  StreamController<int> streamController = StreamController<int>.broadcast();
 
   void addToGameList() {
-    gameList.add(random.nextInt(4));
+    generatedRandomNumber = random.nextInt(4);
+    gameList.add(generatedRandomNumber);
+//    streamController.add(generatedRandomNumber);
     notifyListeners();
     print("Game List=>" + gameList.toString());
   }
@@ -23,13 +30,6 @@ class GameLogic extends ChangeNotifier {
       gameLost = true;
       resetGame();
       notifyListeners();
-    }
-  }
-
-  void showButtonCombination() {
-    for (int i = 0; i < gameList.length; i++) {
-      currentButton = gameList[i];
-//      print(currentButton);
     }
   }
 
@@ -50,8 +50,6 @@ class GameLogic extends ChangeNotifier {
 
   void addToUserList(int buttonPressed) {
     userPress.add(buttonPressed);
-//    print("User List=>" + userPress.toString());
-
     if (userPress.elementAt(currentMove - 1) !=
         gameList.elementAt(currentMove - 1)) {
       checkResult();
@@ -62,7 +60,6 @@ class GameLogic extends ChangeNotifier {
       addToGameList();
       resetUserPressList();
     }
-    showButtonCombination();
     notifyListeners();
   }
 }
