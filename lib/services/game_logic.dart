@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:collection';
-import 'dart:io';
 import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -11,15 +8,11 @@ class GameLogic extends ChangeNotifier {
   var random = Random();
   bool gameLost = false;
   int currentMove = 0;
-  int currentButton;
-  int i = 100;
   var generatedRandomNumber;
-//  StreamController<int> streamController = StreamController<int>.broadcast();
 
   void addToGameList() {
     generatedRandomNumber = random.nextInt(4);
     gameList.add(generatedRandomNumber);
-//    streamController.add(generatedRandomNumber);
     notifyListeners();
     print("Game List=>" + gameList.toString());
   }

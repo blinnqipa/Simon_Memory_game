@@ -38,12 +38,6 @@ class _GameButtonState extends State<GameButton>
         child: InkWell(
           onTap: () {
             setState(() {
-//              stream = Provider.of<GameLogic>(context, listen: false)
-//                  .streamController
-//                  .stream;
-//              stream.listen((event) {
-//                print(event);
-//              });
               if (Provider.of<GameLogic>(context, listen: false)
                   .listEqualLength()) {
                 Provider.of<Score>(context, listen: false).incrementScore();
