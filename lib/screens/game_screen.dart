@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simon_memory_game/services/game_logic.dart';
@@ -7,6 +6,10 @@ import 'package:simon_memory_game/services/score.dart';
 import 'package:simon_memory_game/widgets/game_button.dart';
 
 class GameScreen extends StatefulWidget {
+  final String username;
+
+  GameScreen({@required this.username});
+
   @override
   _GameScreenState createState() => _GameScreenState();
 }
@@ -24,7 +27,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-
+    print(widget.username);
     // sets first value
     _now = DateTime.now().second.toString();
 
