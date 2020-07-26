@@ -16,7 +16,6 @@ class _GameScreenState extends State<GameScreen> {
   var secondColor = Colors.blue;
   var thirdColor = Colors.green;
   var fourthColor = Colors.yellow;
-  Stream stream;
   var lastElement = -1;
 
   String _now;
@@ -30,7 +29,7 @@ class _GameScreenState extends State<GameScreen> {
     _now = DateTime.now().second.toString();
 
     // defines a timer
-    _everySecond = Timer.periodic(Duration(milliseconds: 500), (Timer t) {
+    _everySecond = Timer.periodic(Duration(milliseconds: 100), (Timer t) {
       if (this.mounted) {
         setState(() {
           _now = DateTime.now().second.toString();
@@ -74,81 +73,15 @@ class _GameScreenState extends State<GameScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    curve: Curves.fastOutSlowIn,
-                    height: MediaQuery.of(context).size.height * 0.37,
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .listEqualLength()) {
-                              Provider.of<Score>(context, listen: false)
-                                  .incrementScore();
-                            }
-                            Provider.of<GameLogic>(context, listen: false)
-                                .currentMove++;
-                            Provider.of<GameLogic>(context, listen: false)
-                                .addToUserList(0);
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .gameLost) {
-                              Navigator.pushNamed(context, '/gameOverScreen');
-                              Provider.of<GameLogic>(context, listen: false)
-                                  .gameLost = false;
-                            }
-                          });
-                        },
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        splashColor: Colors.white,
-                      ),
-                      color: (lastElement == 0) ? Colors.black : firstColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
+                  GameButton(
+                    buttonIndex: 0,
+                    buttonColor: Colors.red,
+                    selected: (lastElement == 0) ? true : false,
                   ),
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    curve: Curves.fastOutSlowIn,
-                    height: MediaQuery.of(context).size.height * 0.37,
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .listEqualLength()) {
-                              Provider.of<Score>(context, listen: false)
-                                  .incrementScore();
-                            }
-                            Provider.of<GameLogic>(context, listen: false)
-                                .currentMove++;
-                            Provider.of<GameLogic>(context, listen: false)
-                                .addToUserList(1);
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .gameLost) {
-                              Navigator.pushNamed(context, '/gameOverScreen');
-                              Provider.of<GameLogic>(context, listen: false)
-                                  .gameLost = false;
-                            }
-                          });
-                        },
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        splashColor: Colors.white,
-                      ),
-                      color: (lastElement == 1) ? Colors.black : secondColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
+                  GameButton(
+                    buttonIndex: 1,
+                    buttonColor: Colors.blue,
+                    selected: (lastElement == 1) ? true : false,
                   ),
                 ],
               ),
@@ -156,81 +89,15 @@ class _GameScreenState extends State<GameScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    curve: Curves.fastOutSlowIn,
-                    height: MediaQuery.of(context).size.height * 0.37,
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .listEqualLength()) {
-                              Provider.of<Score>(context, listen: false)
-                                  .incrementScore();
-                            }
-                            Provider.of<GameLogic>(context, listen: false)
-                                .currentMove++;
-                            Provider.of<GameLogic>(context, listen: false)
-                                .addToUserList(2);
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .gameLost) {
-                              Navigator.pushNamed(context, '/gameOverScreen');
-                              Provider.of<GameLogic>(context, listen: false)
-                                  .gameLost = false;
-                            }
-                          });
-                        },
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        splashColor: Colors.white,
-                      ),
-                      color: (lastElement == 2) ? Colors.black : thirdColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
+                  GameButton(
+                    buttonIndex: 2,
+                    buttonColor: Colors.green,
+                    selected: (lastElement == 2) ? true : false,
                   ),
-                  AnimatedContainer(
-                    duration: Duration(seconds: 1),
-                    curve: Curves.fastOutSlowIn,
-                    height: MediaQuery.of(context).size.height * 0.37,
-                    width: MediaQuery.of(context).size.width * 0.47,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Material(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .listEqualLength()) {
-                              Provider.of<Score>(context, listen: false)
-                                  .incrementScore();
-                            }
-                            Provider.of<GameLogic>(context, listen: false)
-                                .currentMove++;
-                            Provider.of<GameLogic>(context, listen: false)
-                                .addToUserList(3);
-                            if (Provider.of<GameLogic>(context, listen: false)
-                                .gameLost) {
-                              Navigator.pushNamed(context, '/gameOverScreen');
-                              Provider.of<GameLogic>(context, listen: false)
-                                  .gameLost = false;
-                            }
-                          });
-                        },
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        splashColor: Colors.white,
-                      ),
-                      color: (lastElement == 3) ? Colors.black : fourthColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
+                  GameButton(
+                    buttonIndex: 3,
+                    buttonColor: Colors.yellow,
+                    selected: (lastElement == 3) ? true : false,
                   ),
                 ],
               ),

@@ -6,7 +6,11 @@ import 'package:simon_memory_game/services/score.dart';
 class GameButton extends StatefulWidget {
   final Color buttonColor;
   final int buttonIndex;
-  const GameButton({@required this.buttonColor, @required this.buttonIndex});
+  final bool selected;
+  const GameButton(
+      {@required this.buttonColor,
+      @required this.buttonIndex,
+      this.selected = false});
 
   @override
   _GameButtonState createState() => _GameButtonState();
@@ -23,16 +27,10 @@ class _GameButtonState extends State<GameButton>
       height: MediaQuery.of(context).size.height * 0.37,
       width: MediaQuery.of(context).size.width * 0.47,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              offset: Offset(0, 0),
-              color: widget.buttonColor,
-              spreadRadius: 2,
-              blurRadius: 0.4)
-        ],
         color: widget.buttonColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        border: Border.all(width: 0, color: Colors.white),
+        border:
+            Border.all(width: (widget.selected) ? 10 : 0, color: Colors.white),
       ),
       child: Material(
         child: InkWell(
@@ -51,7 +49,8 @@ class _GameButtonState extends State<GameButton>
               }
             });
           },
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius:
+              BorderRadius.all(Radius.circular((widget.selected) ? 10 : 20)),
           splashColor: Colors.white,
         ),
         color: widget.buttonColor,

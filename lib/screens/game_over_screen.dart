@@ -9,12 +9,15 @@ class GameOverScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: <Widget>[
-              Text(
-                'U Lost lol',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 80),
+              Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: Text(
+                  '🤔',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 80),
+                ),
               ),
               FlatButton(
                 color: Colors.white24,

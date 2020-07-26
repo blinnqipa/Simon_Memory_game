@@ -6,9 +6,10 @@ class GameLogic extends ChangeNotifier {
   var gameList = List();
   var userPress = List();
   var random = Random();
+  var generatedRandomNumber;
   bool gameLost = false;
   int currentMove = 0;
-  var generatedRandomNumber;
+
 
   void addToGameList() {
     generatedRandomNumber = random.nextInt(4);
