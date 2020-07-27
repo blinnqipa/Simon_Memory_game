@@ -8,7 +8,7 @@ import 'package:simon_memory_game/widgets/game_button.dart';
 class GameScreen extends StatefulWidget {
   final String username;
 
-  GameScreen({@required this.username});
+  GameScreen({this.username});
 
   @override
   _GameScreenState createState() => _GameScreenState();
