@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simon_memory_game/screens/game_over_screen.dart';
 import 'package:simon_memory_game/services/game_logic.dart';
 import 'package:simon_memory_game/services/score.dart';
+import 'package:simon_memory_game/services/user.dart';
 
 class GameButton extends StatefulWidget {
   final Color buttonColor;
   final int buttonIndex;
   final bool selected;
+  final String user;
+  final int score;
   const GameButton(
       {@required this.buttonColor,
       @required this.buttonIndex,
-      this.selected = false});
+      this.selected = false,
+      this.user,
+      this.score});
 
   @override
   _GameButtonState createState() => _GameButtonState();
@@ -18,7 +24,6 @@ class GameButton extends StatefulWidget {
 
 class _GameButtonState extends State<GameButton>
     with SingleTickerProviderStateMixin {
-  Stream stream;
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -44,7 +49,13 @@ class _GameButtonState extends State<GameButton>
               Provider.of<GameLogic>(context, listen: false)
                   .addToUserList(widget.buttonIndex);
               if (Provider.of<GameLogic>(context, listen: false).gameLost) {
-                Navigator.pushNamed(context, '/gameOverScreen');
+                User user = User(widget.user, widget.score);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GameOverScreen(
+                              user: user,
+                            )));
                 Provider.of<GameLogic>(context, listen: false).gameLost = false;
               }
             });

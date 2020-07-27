@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simon_memory_game/services/game_logic.dart';
 import 'package:simon_memory_game/services/score.dart';
-import 'package:simon_memory_game/services/user.dart';
-
 import 'game_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,9 +12,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String username;
+  bool buttonDisabled = true;
 
   @override
   Widget build(BuildContext context) {
+    Function continueGameScreen = () {
+      Provider.of<Score>(context, listen: false).resetScore();
+      Provider.of<GameLogic>(context, listen: false).resetGame();
+      Provider.of<GameLogic>(context, listen: false).addToGameList();
+      Navigator.of(context).pop();
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => GameScreen(username: this.username),
+          ));
+    };
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -56,39 +66,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4)),
-                            title: Text('Please enter username'),
-                            content: TextField(
-                              decoration: InputDecoration(
-                                  icon: Icon(Icons.person_add),
-                                  hintText: 'Username'),
-                              onChanged: (value) {
-                                username = value;
-                                print(value);
-                              },
-                            ),
-                            actions: <Widget>[
-                              FlatButton(
-                                child: Text('Continue'),
-                                onPressed: () {
-                                  Provider.of<Score>(context, listen: false)
-                                      .resetScore();
-                                  Provider.of<GameLogic>(context, listen: false)
-                                      .resetGame();
-                                  Provider.of<GameLogic>(context, listen: false)
-                                      .addToGameList();
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => GameScreen(
-                                              username: this.username)));
-                                },
-                              ),
-                            ],
-                          ));
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      title: Text('Please enter username'),
+                      content: TextField(
+                        decoration: InputDecoration(
+                            icon: Icon(Icons.person_add), hintText: 'Username'),
+                        onChanged: (value) {
+                          username = value;
+                        },
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Continue'),
+                          onPressed: continueGameScreen,
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
@@ -102,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.deepOrange),
                 ),
-                onPressed: () {},
+                onPressed: null,
               ),
             )
           ],

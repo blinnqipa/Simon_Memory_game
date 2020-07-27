@@ -13,5 +13,9 @@ class Score extends ChangeNotifier {
     notifyListeners();
   }
 
+  int scoreAsInt() {
+    return _score;
+  }
+
   String get score => _score.toString();
 }

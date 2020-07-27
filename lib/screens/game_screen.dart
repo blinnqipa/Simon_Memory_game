@@ -73,36 +73,48 @@ class _GameScreenState extends State<GameScreen> {
                       fontSize: 30),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  GameButton(
-                    buttonIndex: 0,
-                    buttonColor: Colors.red,
-                    selected: (lastElement == 0) ? true : false,
-                  ),
-                  GameButton(
-                    buttonIndex: 1,
-                    buttonColor: Colors.blue,
-                    selected: (lastElement == 1) ? true : false,
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    GameButton(
+                      buttonIndex: 0,
+                      buttonColor: Colors.red,
+                      selected: (lastElement == 0) ? true : false,
+                      user: widget.username,
+                      score: Provider.of<Score>(context).scoreAsInt(),
+                    ),
+                    GameButton(
+                      buttonIndex: 1,
+                      buttonColor: Colors.blue,
+                      selected: (lastElement == 1) ? true : false,
+                      user: widget.username,
+                      score: Provider.of<Score>(context).scoreAsInt(),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  GameButton(
-                    buttonIndex: 2,
-                    buttonColor: Colors.green,
-                    selected: (lastElement == 2) ? true : false,
-                  ),
-                  GameButton(
-                    buttonIndex: 3,
-                    buttonColor: Colors.yellow,
-                    selected: (lastElement == 3) ? true : false,
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    GameButton(
+                      buttonIndex: 2,
+                      buttonColor: Colors.green,
+                      selected: (lastElement == 2) ? true : false,
+                      user: widget.username,
+                      score: Provider.of<Score>(context).scoreAsInt(),
+                    ),
+                    GameButton(
+                      buttonIndex: 3,
+                      buttonColor: Colors.yellow,
+                      selected: (lastElement == 3) ? true : false,
+                      user: widget.username,
+                      score: Provider.of<Score>(context).scoreAsInt(),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

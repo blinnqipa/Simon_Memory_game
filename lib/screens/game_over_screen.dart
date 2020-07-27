@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:simon_memory_game/services/user.dart';
 
 class GameOverScreen extends StatelessWidget {
+  final User user;
+  GameOverScreen({@required this.user});
   @override
   Widget build(BuildContext context) {
+    print(user.score);
+    print(user.username);
     return Scaffold(
       backgroundColor: Colors.redAccent,
       body: Center(
