@@ -47,10 +47,10 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color(0xffbdbdbd),
         elevation: 0,
       ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color(0xffbdbdbd),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 3),

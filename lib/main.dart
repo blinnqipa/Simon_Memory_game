@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => GameLogic()),
       ],
       child: MaterialApp(
+        theme: ThemeData(accentColor: Colors.deepOrange),
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
