@@ -44,7 +44,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
               itemBuilder: (context, index) {
                 final user = users.get(index) as User;
                 return ListTile(
-                  onTap: () {},
+                  onTap: (){},
                   leading: Icon(
                     Icons.account_circle,
                     color: Colors.black,

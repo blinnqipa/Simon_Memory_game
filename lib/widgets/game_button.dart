@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simon_memory_game/screens/game_over_screen.dart';
@@ -9,13 +11,13 @@ class GameButton extends StatefulWidget {
   final Color buttonColor;
   final int buttonIndex;
   final bool selected;
-  final String user;
+  final String username;
   final int score;
   const GameButton(
       {@required this.buttonColor,
       @required this.buttonIndex,
       this.selected = false,
-      this.user,
+      this.username,
       this.score});
 
   @override
@@ -49,7 +51,16 @@ class _GameButtonState extends State<GameButton>
               Provider.of<GameLogic>(context, listen: false)
                   .addToUserList(widget.buttonIndex);
               if (Provider.of<GameLogic>(context, listen: false).gameLost) {
-                User user = User(widget.user, widget.score);
+                User user;
+
+                if (widget.username != null) {
+                  user = User(widget.username, widget.score);
+                } else {
+                  var random = Random();
+                  int anotherRandom = random.nextInt(1000);
+                  String nullPlayerName = 'Player #' + anotherRandom.toString();
+                  user = User(nullPlayerName, widget.score);
+                }
                 Navigator.push(
                     context,
                     MaterialPageRoute(

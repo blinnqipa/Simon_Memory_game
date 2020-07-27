@@ -27,7 +27,6 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    print(widget.username);
     // sets first value
     _now = DateTime.now().second.toString();
 
@@ -81,14 +80,14 @@ class _GameScreenState extends State<GameScreen> {
                       buttonIndex: 0,
                       buttonColor: Colors.red,
                       selected: (lastElement == 0) ? true : false,
-                      user: widget.username,
+                      username: widget.username,
                       score: Provider.of<Score>(context).scoreAsInt(),
                     ),
                     GameButton(
                       buttonIndex: 1,
                       buttonColor: Colors.blue,
                       selected: (lastElement == 1) ? true : false,
-                      user: widget.username,
+                      username: widget.username,
                       score: Provider.of<Score>(context).scoreAsInt(),
                     ),
                   ],
@@ -103,14 +102,14 @@ class _GameScreenState extends State<GameScreen> {
                       buttonIndex: 2,
                       buttonColor: Colors.green,
                       selected: (lastElement == 2) ? true : false,
-                      user: widget.username,
+                      username: widget.username,
                       score: Provider.of<Score>(context).scoreAsInt(),
                     ),
                     GameButton(
                       buttonIndex: 3,
                       buttonColor: Colors.yellow,
                       selected: (lastElement == 3) ? true : false,
-                      user: widget.username,
+                      username: widget.username,
                       score: Provider.of<Score>(context).scoreAsInt(),
                     ),
                   ],

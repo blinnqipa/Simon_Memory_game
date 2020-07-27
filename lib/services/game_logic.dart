@@ -10,12 +10,10 @@ class GameLogic extends ChangeNotifier {
   bool gameLost = false;
   int currentMove = 0;
 
-
   void addToGameList() {
     generatedRandomNumber = random.nextInt(4);
     gameList.add(generatedRandomNumber);
     notifyListeners();
-    print("Game List=>" + gameList.toString());
   }
 
   void checkResult() {

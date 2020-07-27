@@ -8,8 +8,6 @@ class GameOverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(user.score);
-    print(user.username);
     void addUser() async {
       await Hive.openBox('scores');
       final hiveDb = Hive.box('scores');
