@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simon_memory_game/services/game_logic.dart';
 import 'package:simon_memory_game/services/score.dart';
 import 'game_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,82 +30,74 @@ class _HomeScreenState extends State<HomeScreen> {
     };
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          'Simon',
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.orange,
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 60, bottom: 30),
-              child: Icon(
-                Icons.add,
-                size: 100,
-                color: Colors.deepOrange,
-              ),
-            ),
-            Text(
-              'Welcome to Simon Says',
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepOrange),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: FlatButton(
-                child: Text(
-                  'Start',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepOrange),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 250, right: 30, left: 30),
+                child: TypewriterAnimatedTextKit(
+                  text: ['Simon', 'Simon says', 'Just another game', 'meh...'],
+                  textStyle: GoogleFonts.pressStart2p(
+                      textStyle:
+                          TextStyle(fontSize: 30, color: Colors.deepOrange)),
+                  repeatForever: true,
+                  speed: Duration(milliseconds: 500),
                 ),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4)),
-                      title: Text('Please enter username'),
-                      content: TextField(
-                        decoration: InputDecoration(
-                            icon: Icon(Icons.person_add), hintText: 'Username'),
-                        onChanged: (value) {
-                          username = value;
-                        },
-                      ),
-                      actions: <Widget>[
-                        FlatButton(
-                          child: Text('Continue'),
-                          onPressed: continueGameScreen,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FlatButton(
+                  child: Text(
+                    'Start',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4)),
+                        title: Text('Please enter username'),
+                        content: TextField(
+                          decoration: InputDecoration(
+                              icon: Icon(Icons.person_add),
+                              hintText: 'Username'),
+                          onChanged: (value) {
+                            username = value;
+                          },
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: FlatButton(
-                child: Text(
-                  'Scores',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepOrange),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text('Continue'),
+                            onPressed: continueGameScreen,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/scoresScreen');
-                },
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: FlatButton(
+                  child: Text(
+                    'Scores',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/scoresScreen');
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
