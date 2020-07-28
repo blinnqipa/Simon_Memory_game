@@ -19,49 +19,29 @@ class _ScoresScreenState extends State<ScoresScreen> {
         elevation: 0,
         backgroundColor: Colors.deepOrange,
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Name',
-                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
+      body: ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          itemCount: users.length,
+          itemBuilder: (context, index) {
+            final user = users.get(index) as User;
+            return ListTile(
+              onTap: () {},
+              leading: Icon(
+                Icons.account_circle,
+                color: Colors.black,
+              ),
+              title: Text(
+                camelize(user.username),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  'Score',
-                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
-                ),
-              ],
-            ),
-          ),
-          ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: users.length,
-              itemBuilder: (context, index) {
-                final user = users.get(index) as User;
-                return ListTile(
-                  onTap: (){},
-                  leading: Icon(
-                    Icons.account_circle,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    camelize(user.username),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  trailing: Text(
-                    user.score.toString(),
-                  ),
-                );
-              }),
-        ],
-      ),
+              ),
+              trailing: Text(
+                user.score.toString(),
+              ),
+            );
+          }),
     );
   }
 }

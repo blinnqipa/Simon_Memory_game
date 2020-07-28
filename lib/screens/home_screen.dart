@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,20 +14,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String username;
-  bool buttonDisabled = true;
-
   @override
   Widget build(BuildContext context) {
+    String username;
     Function continueGameScreen = () {
       Provider.of<Score>(context, listen: false).resetScore();
       Provider.of<GameLogic>(context, listen: false).resetGame();
       Provider.of<GameLogic>(context, listen: false).addToGameList();
       Navigator.of(context).pop();
+
+      if (username == null) {
+        var random = Random();
+        int anotherRandom = random.nextInt(1000);
+        String nullPlayerName = 'Player #' + anotherRandom.toString();
+        username = nullPlayerName;
+      }
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => GameScreen(username: this.username),
+            builder: (context) => GameScreen(username: username),
           ));
     };
     return Scaffold(

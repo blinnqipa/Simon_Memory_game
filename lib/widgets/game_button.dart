@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simon_memory_game/screens/game_over_screen.dart';
@@ -24,8 +22,7 @@ class GameButton extends StatefulWidget {
   _GameButtonState createState() => _GameButtonState();
 }
 
-class _GameButtonState extends State<GameButton>
-    with SingleTickerProviderStateMixin {
+class _GameButtonState extends State<GameButton> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -52,15 +49,7 @@ class _GameButtonState extends State<GameButton>
                   .addToUserList(widget.buttonIndex);
               if (Provider.of<GameLogic>(context, listen: false).gameLost) {
                 User user;
-
-                if (widget.username != null) {
-                  user = User(widget.username, widget.score);
-                } else {
-                  var random = Random();
-                  int anotherRandom = random.nextInt(1000);
-                  String nullPlayerName = 'Player #' + anotherRandom.toString();
-                  user = User(nullPlayerName, widget.score);
-                }
+                user = User(widget.username, widget.score);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
